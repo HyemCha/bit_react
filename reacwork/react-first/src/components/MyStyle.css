@@ -5,3 +5,25 @@ h2.line{
     border: 5px groove gold;
     text-align: center;
 }
+div.inp{
+    width: 300px;
+    height: 250px;
+    border: 3px solid gray;
+    font-size: 20px;
+    padding: 30px 30px;
+    font-family: 'Hahmlet';
+}
+div.inp span{
+    color: red;
+}
+div.result{
+    position: relative;
+    /* left: 400px;
+    top: 50px; */
+    width: 300px;
+    height: 250px;
+    border: 5px pink inset;
+    padding: 30px 30px;
+    font-size: 20px;
+    font-family: 'Dongle';
+}
