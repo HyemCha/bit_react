@@ -1,0 +1,29 @@
+*{
+  font-family: 'Hahmlet';
+}
+
+.toggle-btn-group{
+  margin: 40px;
+}
+/* RouterMain */
+img.main-photo{
+  width: 400px;
+  border-radius: 12px;
+  margin-left: 10px;
+}
+
+div.main_comp{
+  display: flex;
+}
+div.main-bottom{
+  display: flex;
+}
+
+div.food-wrap{
+  margin-left: 50px;
+}
+div.food-images{
+  width: 430px;
+  display: flex;
+  justify-content: space-between;
+}
