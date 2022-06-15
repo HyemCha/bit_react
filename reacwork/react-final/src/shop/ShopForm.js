@@ -12,10 +12,10 @@ const ShopForm = () => {
 
     //url 등록
     let uploadUrl = "http://localhost:9001/shop/upload";
-    let photoUrl = "http://localhost:9001/save/"; //파일명 붙일 거라 / 붙임
+    let photoUrl = "http://localhost:9001/save/"; //파일명 붙일 거라 '/' 붙임
 
     //file change 시 호출 이벤트
-    const uploadImage = (e) => {
+    const uploadImage = e => {
         const uploadFile = e.target.files[0]; 
         const imageFile = new FormData();
         imageFile.append("uploadFile", uploadFile); //첫번째 인자가 스프링으로 넘어가는 애
@@ -26,7 +26,7 @@ const ShopForm = () => {
             data:imageFile,
             headers:{'Content-Type':'multipart/form-data'} //뭐 어쩌구저쩌구라 이거롤 바꿔줘야 ㅏㅁ
         }).then( res => {
-            setPhoto(res.data); //백엔드에서 보낸 변겨오딘 이미지명을 photo 변수에 넣는다
+            setPhoto(res.data); //백엔드에서 보낸 변경된 이미지명을 photo 변수에 넣는다
         }).catch( err => {
             alert(err);
         });
@@ -47,7 +47,7 @@ const ShopForm = () => {
                     <tr>
                         <th width='100' style={{backgroundColor:'#fef'}}>상품사진</th>
                         <td width='300'>
-                            <input type='file' multiple='multiple' className='' style={{width:'250px'}}
+                            <input type='file' className='' style={{width:'250px'}}
                             onChange={uploadImage}/>
                         </td>
                         <th>{photo}</th>

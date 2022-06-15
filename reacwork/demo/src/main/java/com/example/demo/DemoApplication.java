@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan({"come.example.demo","data.*"})
+@ComponentScan({"com.example.demo","data.*"})
 @MapperScan({"data.*"})
 public class DemoApplication {
 
