@@ -5,6 +5,7 @@ import Menu from './components/Menu';
 import './App.css';
 import { Alert } from '@mui/material';
 import { Route } from '@mui/icons-material';
+import foodimg from './img/c03.jpg';
 
 //모든 컴포넌트마다 같게 주면 여기다
 const RouterMain = () => {
@@ -14,7 +15,7 @@ const RouterMain = () => {
             <Alert severity='error'>React Router 공부하기</Alert>
             <Menu/>
             <div className='main-bottom'>
-                <img src='./image/c03.jpg' className='main-photo' alt="../image/꼬치.jpg"/>
+                <img src={foodimg} className='main-photo' alt="../image/꼬치.jpg"/>
             
                 <div className='main_comp'>
                     <router.Routes>
