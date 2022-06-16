@@ -11,4 +11,6 @@ public interface ShopMapper {
 
     public void insertShop(ShopDto dto); //저장
     public List<ShopDto> getShopDatas(); //리턴
+    public ShopDto getData(int num);
+    public void deleteShop(int num);
 }

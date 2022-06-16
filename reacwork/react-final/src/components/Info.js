@@ -7,7 +7,7 @@ const Info = () => {
     return (
         <div>
             <input type="checkbox" id="menuicon"/>
-            <label for="menuicon">
+            <label htmlFor="menuicon">
                 <span></span>
                 <span></span>
                 <span></span>

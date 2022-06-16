@@ -1,4 +1,4 @@
-package data.sevice;
+package data.service;
 
 import java.util.List;
 
@@ -20,4 +20,12 @@ public class ShopService {
     public List<ShopDto> getShopDatas(){
         return shopMapper.getShopDatas();
     } 
+    public ShopDto getData(int num){
+        return shopMapper.getData(num);
+    }
+    public void deleteShop(int num){
+        shopMapper.deleteShop(num);
+    }
+
+
 }

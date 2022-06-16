@@ -62,3 +62,30 @@ div.shopForm{
 div.shopForm table{
   margin: 0 auto;
 }
+
+img.small{
+  width: 60px;
+  height: 60px;
+  border: 1px solid gainsboro;
+  margin-right: 10px;
+}
+
+/* ShopDetail */
+div.shopDetail{
+  display: flex;
+  flex-direction: column;
+}
+div.detail-top{
+  display: flex;
+}
+div.shopDetail{
+  display: flex;
+  flex-direction: column;
+}
+div.sangpum-photo{
+
+}
+div.sangpum-detail{
+  display: flex;
+  flex-direction: column;
+}

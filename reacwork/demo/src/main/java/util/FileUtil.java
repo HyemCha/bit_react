@@ -17,7 +17,7 @@ public class FileUtil {
 		int hh=date.getHours();
 		int mm=date.getMinutes();
 		int ss=date.getSeconds();
-		String renameFile=file+"_"+y+(m<10?"0"+m:m)+(d<10?"0"+d:d)+(hh<10?"0"+hh:hh)
+		String renameFile=""+y+(m<10?"0"+m:m)+(d<10?"0"+d:d)+(hh<10?"0"+hh:hh)
 				+(mm<10?"0"+mm:mm)+(ss<10?"0"+ss:ss)+ext;
 		return renameFile;
 	}

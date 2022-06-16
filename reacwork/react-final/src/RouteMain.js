@@ -20,7 +20,7 @@ const RouteMain = () => {
                     <router.Routes>
                         <router.Route path='/shop/list' element={<Shop/>}/>
                         <router.Route path='/shop/form' element={<ShopForm/>}/>
-                        <router.Route path='/shop/detail' element={<ShopDetail/>}/>
+                        <router.Route path='/shop/detail/:num' element={<ShopDetail/>}/>
 
                         <router.Route path='/' element={<Main/>}/>
                         <router.Route path='/board/list' element={<Board/>}/>
