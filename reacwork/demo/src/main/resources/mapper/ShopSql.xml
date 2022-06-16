@@ -11,6 +11,6 @@
         select * from shop where num=#{num}
     </select>
     <delete id="deleteShop" parameterType="int">
-        delete from shp where num=#{num}
+        delete from shop where num=#{num}
     </delete>
 </mapper>

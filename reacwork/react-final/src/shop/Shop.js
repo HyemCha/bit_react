@@ -30,6 +30,7 @@ export default function Shop() {
             //스프링으로부터 받아온 List를 shopList에 넣기
             setShopList(res.data);
             console.log("len = " + res.data.length);
+            // itemInject(shopList);
         })
     }
 
@@ -41,12 +42,10 @@ export default function Shop() {
     
     return (
         <div>
-            <Stack direction="row" spacing={2}>
-                <Button variant="outlined" style={{}}
-                onClick={()=>{
-                    navi("/shop/form")
-                }}>상품등록</Button>
-            </Stack>
+            <Button variant="outlined" style={{}}
+            onClick={()=>{
+                navi("/shop/form")
+            }}>상품등록</Button>
             {/* <ImageList
                 sx={{ width: 500, height: 450 }}
                 variant="quilted"
@@ -57,7 +56,7 @@ export default function Shop() {
                     <ImageListItem key={item.img} cols={item.cols || 1} rows={item.rows || 1}>
                     <img
                         {...srcset(item.img, 121, item.rows, item.cols)}
-                        alt={item.title}
+                        alt=''
                         loading="lazy"
                     />
                     </ImageListItem>
@@ -84,30 +83,36 @@ export default function Shop() {
 }
 
 
-function itemInject(itemData){
-    let rows,cols=1;
+// function itemInject(shopList){
+//     let photoUrl = "http://localhost:9001/save/";
+//     const sllength = shopList.length;
+//     console.log(sllength);
+//     shopList.map((data,idx)=>{
+//         let i=idx;
+//             if(i%8===0){
+//                 i=0
+//             }
+//             if(i==0 || i==5){
+//                 itemData.push({
+//                     img:photoUrl+data.photo,
+//                     num:data.num,
+//                     rows:2,
+//                     cols:2
+//                 })
+//             }else if(i==3 || i==4){
+//                 itemData.push({
+//                     img:photoUrl+data.photo,
+//                     num:data.num,
+//                     cols:2
+//                 })
+//             }else{
+//                 itemData.push({
+//                     img:photoUrl+data.photo,
+//                     num:data.num
+//                 })
+//             }
+//     })
+    
+// }
 
-    for(var i=0; i<8; i++){
-        if(i==0 || i==4){
-            itemData.push({
-                img:'',
-                num:i,
-                rows:2,
-                cols:2
-            })
-        }else if(i==3 || i==5){
-            itemData.push({
-                img:'',
-                num:i,
-                cols:2
-            })
-        }else{
-            itemData.push({
-                img:'',
-                num:i
-            })
-        }
-    }
-}
-
-const itemData = [];
+let itemData = [];
