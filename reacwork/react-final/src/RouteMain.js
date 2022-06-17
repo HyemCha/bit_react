@@ -25,7 +25,7 @@ const RouteMain = () => {
                         <router.Route path='/shop/updateform/:num' element={<ShopUpdateForm/>}/>
 
                         {/* Memo */}
-                        <router.Route path='/memo' element={<Memo/>}/>
+                        <router.Route path='/memo/list' element={<Memo/>}/>
 
                         <router.Route path='/' element={<Main/>}/>
                         <router.Route path='/board/list' element={<Board/>}/>

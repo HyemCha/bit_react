@@ -24,21 +24,47 @@ import MemoRowItem from './MemoRowItem';
 
 
 export default function Memo(){
-    const [messageList, setMessageList] = React.useState([]);
+    //.env 팡ㄹ에서 전역변수값 가져오기
+    // const SPRING_URL = process.env.REACT_APP_SPRING_URL;
+    
+    const navi = rrd.useNavigate();
 
+    //전송할 데이터
     const [nickname,setNickname] = React.useState('');
     const [message,setMessage] = React.useState('');
 
-    const [value, setValue] = React.useState(0);
-    const ref = React.useRef(null);
+    //리스트
+    const [messageList, setMessageList] = React.useState([]);
 
+    let getListUrl = "http://localhost:9001/memo/list";
+    let insertUrl = "http://localhost:9001/memo/insert";
+
+    const list = () => {
+        axios.get(getListUrl)
+        .then(res => {
+            setMessageList(res.data);
+            console.log("messageList : " + res.data.length);
+            console.log("res.data : " + res.data)
+            console.dir(res)
+            console.dir("res.data"+res.data)
+            console.log(res.data[0])
+        })
+    }
+    React.useEffect(()=>{
+        list();
+    },[]);
+
+    const onInsert = () => {
+        axios.post(insertUrl,{nickname,message})
+        .then(res => {
+            console.log("성공");
+            // navi("/memo/list");
+        })
+    }
+    
     return <div>
         <h1>Memo</h1>
         <div className='comment-input-wrap'>
-        {/* <div class="form__group field">
-            <input type="input" class="form__field" placeholder="Name" name="name" id='name' required />
-            <label for="name" class="form__label">Name</label>
-        </div> */}
             <input type='text' placeholder='닉네임' style={{width:'130px'}}
             onChange={e=>{
                 setNickname(e.target.value);
@@ -47,11 +73,18 @@ export default function Memo(){
             onChange={e=>{
                 setMessage(e.target.value);
             }}></textarea>
-            <Button>등록</Button>
+            <Button
+            onClick={()=>{
+                onInsert();
+            }}>등록</Button>
         </div>
 
         <div className='comment-wrap'>
-            <MemoRowItem/>
+            {
+                messageList.map((row, idx) => {
+                    <MemoRowItem key={idx} idx={idx} row={row}/>
+                })
+            }
         </div>
     </div>
 }
