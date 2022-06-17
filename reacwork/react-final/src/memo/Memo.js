@@ -24,7 +24,10 @@ import MemoRowItem from './MemoRowItem';
 
 
 export default function Memo(){
+    const [messageList, setMessageList] = React.useState([]);
+
     const [nickname,setNickname] = React.useState('');
+    const [message,setMessage] = React.useState('');
 
     const [value, setValue] = React.useState(0);
     const ref = React.useRef(null);
@@ -40,7 +43,10 @@ export default function Memo(){
             onChange={e=>{
                 setNickname(e.target.value);
             }}/>
-            <textarea placeholder='내용' style={{width:'600px'}}></textarea>
+            <textarea placeholder='내용' style={{width:'600px'}}
+            onChange={e=>{
+                setMessage(e.target.value);
+            }}></textarea>
             <Button>등록</Button>
         </div>
 
