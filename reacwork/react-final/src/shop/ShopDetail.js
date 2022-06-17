@@ -1,6 +1,8 @@
 import * as React from 'react';
 import '../App.css';
 import {useParams,useNavigate} from 'react-router-dom'
+import memberprofile from '../image/cute.png';
+
 import axios from 'axios';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
@@ -8,16 +10,64 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import { styled } from '@mui/material/styles';
+import Card from '@mui/material/Card';
+import CardHeader from '@mui/material/CardHeader';
+import CardMedia from '@mui/material/CardMedia';
+import CardContent from '@mui/material/CardContent';
+import CardActions from '@mui/material/CardActions';
+import Collapse from '@mui/material/Collapse';
+import Avatar from '@mui/material/Avatar';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import { red } from '@mui/material/colors';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import ShareIcon from '@mui/icons-material/Share';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+
+const ExpandMore = styled((props) => {
+  const { expand, ...other } = props;
+  return <IconButton {...other} />;
+})(({ theme, expand }) => ({
+  transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
+  marginLeft: 'auto',
+  transition: theme.transitions.create('transform', {
+    duration: theme.transitions.duration.shortest,
+  }),
+}));
 
 
-const ShopDetail = () => { 
+const ShopDetail = () => {
+    //.env 팡ㄹ에서 전역변수값 가져오기
+    const SPRING_URL = process.env.REACT_APP_SPRING_URL;
+    const [expanded, setExpanded] = React.useState(false);
+    const handleExpandClick = () => {
+        setExpanded(!expanded);
+      };
+
     const [open, setOpen] = React.useState(false);
 
     const navi = useNavigate();
     const {num} = useParams();
     const [data,setData] = React.useState('');
-    
 
+    const [heartColor,setHeartColor] = React.useState(null);
+    const heartSx = {
+        fill:heartColor
+    }
+
+    //하트 색
+    const heartColorChange = () => {
+        if(heartColor===null){
+            setHeartColor('red');
+        }else{
+            setHeartColor(null);
+        }
+        
+    }
+    
+// 삭제
     const handleClickOpen = () => {
       setOpen(true);
     };
@@ -27,9 +77,9 @@ const ShopDetail = () => {
     };
 
     //url 등록
-    let detailUrl = "http://localhost:9001/shop/detail?num="+num;
-    let photoUrl = "http://localhost:9001/save/";
-    let deleteUrl = "http://localhost:9001/shop/delete?num="+num;
+    let detailUrl = SPRING_URL + "shop/detail?num="+num;
+    let photoUrl = SPRING_URL + "save/";
+    let deleteUrl = SPRING_URL + "shop/delete?num="+num;
 
     //스프링으로부터 num에 해당하는 data 받기
     const onDataReceive = () => {
@@ -59,8 +109,85 @@ const ShopDetail = () => {
 
     return (
         <div className='shopDetail'>
+            <Card sx={{ maxWidth: 500 , }}>
+                <CardHeader
+                    avatar={
+                    // <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+                    //     R
+                    // </Avatar>
+                    <Avatar alt="Remy Sharp" src={memberprofile} />
+                    }
+                    action={
+                    <IconButton aria-label="settings">
+                        <MoreVertIcon />
+                    </IconButton>
+                    }
+                    title={data.sangpum}
+                    subheader={data.ipgoday}
+                />
+                <CardMedia
+                    component="img"
+                    height="300"
+                    image={photoUrl + data.photo}
+                    alt="Paella dish"
+                />
+                <CardContent>
+                    <Typography variant="body2" color="text.secondary">
+                        {data.ipgoday}의 신메뉴! {data.sangpum}를 {data.dan}원에 만나보세요~!
+                        {data.su}개 한정 판매!
+                    </Typography>
+                </CardContent>
+                <CardActions disableSpacing>
+                    <IconButton aria-label="add to favorites">
+                    <FavoriteIcon sx={heartSx}
+                    onClick={()=>{
+                        heartColorChange();
+                    }}/>
+                    </IconButton>
+                    <IconButton aria-label="share">
+                    <ShareIcon />
+                    </IconButton>
+                    <ExpandMore
+                    expand={expanded}
+                    onClick={handleExpandClick}
+                    aria-expanded={expanded}
+                    aria-label="show more"
+                    >
+                    <ExpandMoreIcon />
+                    </ExpandMore>
+                </CardActions>
+                <Collapse in={expanded} timeout="auto" unmountOnExit>
+                    <CardContent>
+                    <Typography paragraph>Method:</Typography>
+                    <Typography paragraph>
+                        Heat 1/2 cup of the broth in a pot until simmering, add saffron and set
+                        aside for 10 minutes.
+                    </Typography>
+                    <Typography paragraph>
+                        Heat oil in a (14- to 16-inch) paella pan or a large, deep skillet over
+                        medium-high heat. Add chicken, shrimp and chorizo, and cook, stirring
+                        occasionally until lightly browned, 6 to 8 minutes. Transfer shrimp to a
+                        large plate and set aside, leaving chicken and chorizo in the pan. Add
+                        pimentón, bay leaves, garlic, tomatoes, onion, salt and pepper, and cook,
+                        stirring often until thickened and fragrant, about 10 minutes. Add
+                        saffron broth and remaining 4 1/2 cups chicken broth; bring to a boil.
+                    </Typography>
+                    <Typography paragraph>
+                        Add rice and stir very gently to distribute. Top with artichokes and
+                        peppers, and cook without stirring, until most of the liquid is absorbed,
+                        15 to 18 minutes. Reduce heat to medium-low, add reserved shrimp and
+                        mussels, tucking them down into the rice, and cook again without
+                        stirring, until mussels have opened and rice is just tender, 5 to 7
+                        minutes more. (Discard any mussels that don&apos;t open.)
+                    </Typography>
+                    <Typography>
+                        Set aside off of the heat to let rest for 10 minutes, and then serve.
+                    </Typography>
+                    </CardContent>
+                </Collapse>
+            </Card>
             {/* <h1>{idx}</h1> */}
-            <div className='detail-top'>
+            {/* <div className='detail-top'>
                 <div className='sangpum-photo'>
                     <img alt='' src={photoUrl + data.photo}/>
                 </div>
@@ -70,7 +197,7 @@ const ShopDetail = () => {
                     <span>단가 : {data.dan}</span>
                     <span>입고일 : {data.ipgoday}</span>
                 </div>
-            </div>
+            </div> */}
             <div className='detail-bottom'>
                 <Button variant="outlined" 
                 onClick={()=>{
@@ -80,8 +207,12 @@ const ShopDetail = () => {
                 onClick={()=>{
                     navi("/shop/form")
                 }}>상품추가</Button>
-                <Button variant="outlined" >수정</Button>
+                <Button variant="outlined" onClick={()=>{
+                    navi(`/shop/updateform/${num}`);
+                }}>수정</Button>
                 <Button variant="outlined" onClick={handleClickOpen}>삭제</Button>
+                
+                {/* Dialog */}
                 <Dialog
                     open={open}
                     onClose={handleClose}

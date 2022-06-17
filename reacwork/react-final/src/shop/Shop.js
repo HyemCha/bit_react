@@ -41,7 +41,7 @@ export default function Shop() {
     },[]);
     
     return (
-        <div>
+        <div className='shopList'>
             <Button variant="outlined" style={{}}
             onClick={()=>{
                 navi("/shop/form")
@@ -89,6 +89,7 @@ export default function Shop() {
 //     console.log(sllength);
 //     shopList.map((data,idx)=>{
 //         let i=idx;
+//         for(i<8){
 //             if(i%8===0){
 //                 i=0
 //             }
@@ -111,6 +112,8 @@ export default function Shop() {
 //                     num:data.num
 //                 })
 //             }
+//         }
+            
 //     })
     
 // }

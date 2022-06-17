@@ -4,8 +4,9 @@ import * as router from 'react-router-dom';
 import {About,Info,Main,Menu,Title} from './components';
 import Board from './board/Board';
 import Login from './login/Login';
-import {Shop,ShopDetail,ShopForm} from './shop';
+import {Shop,ShopDetail,ShopForm,ShopUpdateForm} from './shop';
 import Member from './member/Member';
+import Memo from './memo/Memo';
 
 const RouteMain = () => {
     return (
@@ -21,6 +22,10 @@ const RouteMain = () => {
                         <router.Route path='/shop/list' element={<Shop/>}/>
                         <router.Route path='/shop/form' element={<ShopForm/>}/>
                         <router.Route path='/shop/detail/:num' element={<ShopDetail/>}/>
+                        <router.Route path='/shop/updateform/:num' element={<ShopUpdateForm/>}/>
+
+                        {/* Memo */}
+                        <router.Route path='/memo' element={<Memo/>}/>
 
                         <router.Route path='/' element={<Main/>}/>
                         <router.Route path='/board/list' element={<Board/>}/>

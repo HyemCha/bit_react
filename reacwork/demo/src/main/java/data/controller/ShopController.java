@@ -72,7 +72,7 @@ public class ShopController {
         dto.setPhoto(photoName);
         System.out.println(photoName);
         shopService.insertShop(dto);
-        photoName="";
+        photoName=null;
     }
     
     @GetMapping("/list")
@@ -100,4 +100,13 @@ public class ShopController {
         //db delete
         shopService.deleteShop(num);
     }
+
+    @PostMapping("/update") //json으로 받으니까 requestBody로 받기
+    public void update(@RequestBody ShopDto dto){
+        //사진이 있을 경우 이미지명 넣기
+        dto.setPhoto(photoName);
+        shopService.updateShop(dto);
+        photoName=null;
+    }
+    
 }

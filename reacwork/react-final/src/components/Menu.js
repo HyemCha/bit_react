@@ -12,6 +12,7 @@ const Menu = () => {
     return (
         <ul className='menu'>
             <li><NavLink to='/'><HomeIcon/></NavLink></li>
+            <li><NavLink to='/memo'>Memo</NavLink></li>
             <li><NavLink to='/shop/list'>Shop</NavLink></li>
             <li><NavLink to='/board/list'>Board</NavLink></li>
             <li><NavLink to='/about'>About</NavLink></li>
