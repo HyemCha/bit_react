@@ -1,6 +1,6 @@
 package data.dto;
 
-import java.security.Timestamp;
+import java.sql.Timestamp;
 
 import org.apache.ibatis.type.Alias;
 
@@ -14,6 +14,7 @@ public class MemoDto {
     private int num;
     private String nickname;
     private String message;
+
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Timestamp writeday;
 }

@@ -29,9 +29,6 @@ export default function Shop() {
         .then(res=>{
             //스프링으로부터 받아온 List를 shopList에 넣기
             setShopList(res.data);
-            console.log("len = " + res.data.length);
-            console.dir("res.data : " + res.data)
-            console.log("res.data.sangpum : " + res.data)
             // itemInject(shopList);
         })
     }
@@ -72,7 +69,10 @@ export default function Shop() {
                         <th width='50'>상세보기</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody>{console.log('"shopList"')}
+                {
+                    console.log(shopList)
+                }
                     {
                         shopList.map((row,index)=>(
                             <ShopRowItem key={index} idx={index} row={row}/>

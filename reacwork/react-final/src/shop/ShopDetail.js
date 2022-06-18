@@ -64,7 +64,6 @@ const ShopDetail = () => {
         }else{
             setHeartColor(null);
         }
-        
     }
     
 // 삭제

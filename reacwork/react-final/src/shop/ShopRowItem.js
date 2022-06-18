@@ -8,6 +8,7 @@ const ShopRowItem = ({idx,row}) => {
     let photoUrl = "http://localhost:9001/save/";
     return (
         <tr>
+            {console.log("ShopRowItem")}
             <td>{idx+1}</td>
             <td>
                 <img alt='' src={photoUrl + row.photo} className='small'/>

@@ -1,35 +1,112 @@
 import * as React from 'react';
 import '../App.css';
-// import './Memo.scss';
-import memberprofile from '../image/cute.png';
-
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Button from '@mui/material/Button';
-import Stack from '@mui/material/Stack';
-import axios from 'axios'; //백엔드와 통신할 때 반드시 import 해야 함
-import * as rrd from 'react-router-dom';
-import Box from '@mui/material/Box';
-import CssBaseline from '@mui/material/CssBaseline';
-import BottomNavigation from '@mui/material/BottomNavigation';
-import BottomNavigationAction from '@mui/material/BottomNavigationAction';
-import RestoreIcon from '@mui/icons-material/Restore';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import ArchiveIcon from '@mui/icons-material/Archive';
+import ClickAwayListener from '@mui/material/ClickAwayListener';
+import Grow from '@mui/material/Grow';
 import Paper from '@mui/material/Paper';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
-import ListItemText from '@mui/material/ListItemText';
-import Avatar from '@mui/material/Avatar';
+import Popper from '@mui/material/Popper';
+import MenuItem from '@mui/material/MenuItem';
+import MenuList from '@mui/material/MenuList';
+import Stack from '@mui/material/Stack';
 
 
-export default function MemoRowItem({idx,row}){
-  console.log("props.row.nickname : " + row.nickname)
+
+const MemoRowItem = ({idx,row,listLength,onDelete}) => {
+
+    const [open, setOpen] = React.useState(false);
+    const anchorRef = React.useRef(null);
+
+    const handleToggle = () => {
+        setOpen((prevOpen) => !prevOpen);
+    };
+
+    const handleClose = (event) => {
+        if (anchorRef.current && anchorRef.current.contains(event.target)) {
+        return;
+        }
+
+        setOpen(false);
+    };
+
+    const deleteMemo = (e,num) => {
+        console.log("comment delete");
+        onDelete(num);
+        handleClose(e);
+    };
+
+    function handleListKeyDown(event) {
+        if (event.key === 'Tab') {
+        event.preventDefault();
+        setOpen(false);
+        } else if (event.key === 'Escape') {
+        setOpen(false);
+        }
+    }
+
+    // return focus to the button when we transitioned from !open -> open
+    const prevOpen = React.useRef(open);
+    React.useEffect(() => {
+        if (prevOpen.current === true && open === false) {
+        anchorRef.current.focus();
+        }
+
+        prevOpen.current = open;
+    }, [open]);
 
     return (
         <div className='memo-row-wrap'>
-            <p>{row.nickname}</p>
-            <div>{row.message}</div>
+            <div style={{fontSize:'12px',color:'gray',display:'flex',justifyContent:'space-between'}}>
+                <span>{row.num}</span>
+                <div className='time-btn-wrap'>
+                    <span>{row.writeday}</span>&nbsp;
+                    <MoreVertIcon sx={{width:'18px'}} 
+                        ref={anchorRef}
+                        id="composition-button"
+                        aria-controls={open ? 'composition-menu' : undefined}
+                        aria-expanded={open ? 'true' : undefined}
+                        aria-haspopup="true"
+                        onClick={handleToggle}/>
+                    <Popper
+                    open={open}
+                    anchorEl={anchorRef.current}
+                    role={undefined}
+                    placement="bottom-start"
+                    transition
+                    disablePortal
+                    >
+                    {({ TransitionProps, placement }) => (
+                        <Grow
+                        {...TransitionProps}
+                        style={{
+                            transformOrigin:
+                            placement === 'bottom-start' ? 'left top' : 'left bottom',
+                        }}
+                        >
+                        <Paper>
+                            <ClickAwayListener onClickAway={handleClose}>
+                            <MenuList
+                                autoFocusItem={open}
+                                id="composition-menu"
+                                aria-labelledby="composition-button"
+                                onKeyDown={handleListKeyDown}
+                            >
+                                <MenuItem onClick={e=>{
+                                    deleteMemo(e,row.num)
+                                }}>삭제하기</MenuItem>
+                            </MenuList>
+                            </ClickAwayListener>
+                        </Paper>
+                        </Grow>
+                    )}
+                    </Popper>
+                </div>
+                
+            </div>
+            <div style={{fontSize:'14px',marginTop:'5px'}}><span style={{fontWeight:'bold'}}>{row.nickname}</span>님으로부터의 메모,</div>
+            <div className='memo-message' style={{marginTop:'5px',overflow:'hidden'}}>{row.message}</div>
         </div>
 
     );
 }
+export default MemoRowItem;

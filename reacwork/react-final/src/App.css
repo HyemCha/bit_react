@@ -98,10 +98,52 @@ div.sangpum-detail{
   display: flex;
   flex-direction: column;
 }
+/* memo */
+div.memo-wrap{
+  display: flex;
+  flex-direction: column;
 
+}
 div.comment-input-wrap{
-  width: 968px;
-  padding: 8px 16px;
+  width: 958px;
+  padding: 8px 21px;
   display: flex;
   justify-content: space-between;
+}
+div.comment-wrap{
+  height: 600px;
+  -ms-overflow-style: none;
+  overflow: auto;
+}
+div.comments{
+  display: flex;
+  /* flex-direction: column; */
+  flex-wrap: wrap;
+  align-items: center;
+  width: 968px;
+  /* border: 1px solid red; */
+  margin-top: 30px;
+  margin-bottom: 50px;
+  padding: 0 16px;
+}
+div.comment-wrap::-webkit-scrollbar{
+  display:none;
+}
+div.memo-row-wrap{
+  width: 250px;
+  height: 200px;
+  padding: 8px 16px;
+  border: 1px solid rgb(210, 210, 210);
+  border-radius: 10px;
+  margin: 19px 19px;
+  box-shadow: 0 2px 5px 1px rgb(64 60 67 / 16%);
+}
+div.time-btn-wrap {
+  width: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+div.memo-message{
+  overflow: hidden;
 }
