@@ -6,8 +6,8 @@ import ImageListItem from '@mui/material/ImageListItem';
 const Main = () => {
     return (
         <div>
-            <h1>Main</h1>
-            <ImageList sx={{ width: 1000, height: 450 }} cols={6} rowHeight={164}>
+            <h1>Main&nbsp;&nbsp;<span style={{fontSize:'14px',fontWeight:'normal'}}>메인 페이지 입니다🌳</span></h1>
+            <ImageList sx={{ width: 1000 }} cols={6} rowHeight={164}>
             {itemData.map((item) => (
                 <ImageListItem key={item.img}>
                 <img

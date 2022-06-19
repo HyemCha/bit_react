@@ -15,6 +15,6 @@ public class MemoDto {
     private String nickname;
     private String message;
 
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
     private Timestamp writeday;
 }

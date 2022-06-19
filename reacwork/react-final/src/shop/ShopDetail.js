@@ -2,7 +2,6 @@ import * as React from 'react';
 import '../App.css';
 import {useParams,useNavigate} from 'react-router-dom'
 import memberprofile from '../image/cute.png';
-
 import axios from 'axios';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
@@ -26,16 +25,24 @@ import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 
+import ClickAwayListener from '@mui/material/ClickAwayListener';
+import Grow from '@mui/material/Grow';
+import Paper from '@mui/material/Paper';
+import Popper from '@mui/material/Popper';
+import MenuItem from '@mui/material/MenuItem';
+import MenuList from '@mui/material/MenuList';
+import Stack from '@mui/material/Stack';
+
 const ExpandMore = styled((props) => {
-  const { expand, ...other } = props;
-  return <IconButton {...other} />;
-})(({ theme, expand }) => ({
-  transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
-  marginLeft: 'auto',
-  transition: theme.transitions.create('transform', {
-    duration: theme.transitions.duration.shortest,
-  }),
-}));
+    const { expand, ...other } = props;
+    return <IconButton {...other} />;
+    })(({ theme, expand }) => ({
+    transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
+    marginLeft: 'auto',
+    transition: theme.transitions.create('transform', {
+        duration: theme.transitions.duration.shortest,
+    }),
+    }));
 
 
 const ShopDetail = () => {
@@ -66,7 +73,42 @@ const ShopDetail = () => {
         }
     }
     
-// 삭제
+// 토글
+    const [openToggle, setOpenToggle] = React.useState(false);
+    const anchorRef = React.useRef(null);
+
+    const handleToggle = () => {
+        setOpenToggle((prevOpen) => !prevOpen);
+    };
+
+    const handleCloseToggle = (event) => {
+        if (anchorRef.current && anchorRef.current.contains(event.target)) {
+            return;
+        }
+        setOpenToggle(false);
+    };
+
+    function handleListKeyDown(event) {
+    if (event.key === 'Tab') {
+        event.preventDefault();
+        setOpenToggle(false);
+    } else if (event.key === 'Escape') {
+        setOpenToggle(false);
+    }
+    }
+
+    // return focus to the button when we transitioned from !open -> open
+    const prevOpen = React.useRef(openToggle);
+    React.useEffect(() => {
+    if (prevOpen.current === true && openToggle === false) {
+        anchorRef.current.focus();
+    }
+
+    prevOpen.current = openToggle;
+    }, [openToggle]);
+// 토글
+
+    // 삭제
     const handleClickOpen = () => {
       setOpen(true);
     };
@@ -107,7 +149,9 @@ const ShopDetail = () => {
     }
 
     return (
-        <div className='shopDetail'>
+        <div>
+            <h1>ShopDetail&nbsp;&nbsp;<span style={{fontSize:'14px',fontWeight:'normal'}}><strong>'{data.sangpum}'</strong> 상세 페이지 입니다🍀</span></h1>
+            <div className='shopDetail'>
             <Card sx={{ maxWidth: 500 , }}>
                 <CardHeader
                     avatar={
@@ -117,9 +161,61 @@ const ShopDetail = () => {
                     <Avatar alt="Remy Sharp" src={memberprofile} />
                     }
                     action={
-                    <IconButton aria-label="settings">
-                        <MoreVertIcon />
-                    </IconButton>
+                    <Stack direction="row" spacing={2}>
+                        <div>
+                            <Button
+                                ref={anchorRef}
+                                id="composition-button"
+                                aria-controls={openToggle ? 'composition-menu' : undefined}
+                                aria-expanded={openToggle ? 'true' : undefined}
+                                aria-haspopup="true"
+                                onClick={handleToggle}
+                            >
+                                <IconButton aria-label="settings">
+                                    <MoreVertIcon />
+                                </IconButton>
+                            </Button>
+                            <Popper
+                                open={openToggle}
+                                anchorEl={anchorRef.current}
+                                role={undefined}
+                                placement="bottom-start"
+                                transition
+                                disablePortal
+                            >
+                                {({ TransitionProps, placement }) => (
+                                <Grow
+                                    {...TransitionProps}
+                                    style={{
+                                    transformOrigin:
+                                        placement === 'bottom-start' ? 'left top' : 'left bottom',
+                                    }}
+                                >
+                                    <Paper>
+                                        <ClickAwayListener onClickAway={handleClose}>
+                                            <MenuList
+                                            autoFocusItem={openToggle}
+                                            id="composition-menu"
+                                            aria-labelledby="composition-button"
+                                            onKeyDown={handleListKeyDown}
+                                            >
+                                            <MenuItem onClick={(e)=>{
+                                                navi(`/shop/updateform/${num}`);
+                                                handleCloseToggle(e);
+                                            }}>수정</MenuItem>
+                                            <MenuItem onClick={(e)=>{
+                                                handleClickOpen();
+                                                handleCloseToggle(e);
+                                            }}>삭제</MenuItem>
+                                            </MenuList>
+                                        </ClickAwayListener>
+                                    </Paper>
+                                </Grow>
+                                )}
+                            </Popper>
+                        </div>
+                    </Stack>
+                    
                     }
                     title={data.sangpum}
                     subheader={data.ipgoday}
@@ -206,10 +302,10 @@ const ShopDetail = () => {
                 onClick={()=>{
                     navi("/shop/form")
                 }}>상품추가</Button>
-                <Button variant="outlined" onClick={()=>{
+                {/* <Button variant="outlined" onClick={()=>{
                     navi(`/shop/updateform/${num}`);
-                }}>수정</Button>
-                <Button variant="outlined" onClick={handleClickOpen}>삭제</Button>
+                }}>수정</Button> */}
+                {/* <Button variant="outlined" onClick={handleClickOpen}>삭제</Button> */}
                 
                 {/* Dialog */}
                 <Dialog
@@ -235,6 +331,8 @@ const ShopDetail = () => {
                 </Dialog>
             </div>
         </div>
+        </div>
+        
     )
 }
 

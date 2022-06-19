@@ -7,22 +7,17 @@ const ShopRowItem = ({idx,row}) => {
 
     let photoUrl = "http://localhost:9001/save/";
     return (
-        <tr>
-            {console.log("ShopRowItem")}
-            <td>{idx+1}</td>
-            <td>
-                <img alt='' src={photoUrl + row.photo} className='small'/>
-                <b>{row.sangpum}</b>
-            </td>
-            <td>
-                <button type='button' className='' 
-                onClick={()=>{
+        <div className='shop-row-wrap'>
+            <div className='shop-detail-wrap'
+            onClick={()=>{
                     // navi(`/shop/detail/${row.idx}`);
                     console.log("num:"+row.num);
                     navi("/shop/detail/" + row.num);
-                }}>detail</button>
-            </td>
-        </tr>
+                }}>
+                <img alt='' src={photoUrl + row.photo} className='shop-row-img'/>
+            </div>
+            <b>{row.sangpum}</b>
+        </div>
     )
 }
 

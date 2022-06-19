@@ -17,6 +17,6 @@ public class ShopDto {
     private int su;
     private int dan;
 
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy년 MM월 dd일")
     private Timestamp ipgoday;
 }

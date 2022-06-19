@@ -40,46 +40,19 @@ export default function Shop() {
     },[]);
     
     return (
-        <div className='shopList'>
-            <Button variant="outlined" style={{}}
+        <div>
+            <h1>Shop&nbsp;&nbsp;<span style={{fontSize:'14px',fontWeight:'normal'}}>음~ 맛있다~ 마.트. 다녀오셨어요?🍜</span></h1>
+            <Button variant="outlined"
             onClick={()=>{
                 navi("/shop/form")
             }}>상품등록</Button>
-            {/* <ImageList
-                sx={{ width: 500, height: 450 }}
-                variant="quilted"
-                cols={4}
-                rowHeight={121}
-                >
-                {itemData.map((item) => (
-                    <ImageListItem key={item.img} cols={item.cols || 1} rows={item.rows || 1}>
-                    <img
-                        {...srcset(item.img, 121, item.rows, item.cols)}
-                        alt=''
-                        loading="lazy"
-                    />
-                    </ImageListItem>
-                ))}
-            </ImageList> */}
-            <table className='table table-bordered' style={{width:'500px'}}>
-                <thead>
-                    <tr style={{backgroundColor:'#fdf'}}>
-                        <th width='50'>번호</th>
-                        <th width='350'>상품명</th>
-                        <th width='50'>상세보기</th>
-                    </tr>
-                </thead>
-                <tbody>{console.log('"shopList"')}
+            <div className='shopList'>
                 {
-                    console.log(shopList)
+                    shopList.map((row,index)=>(
+                        <ShopRowItem key={index} idx={index} row={row}/>
+                    ))
                 }
-                    {
-                        shopList.map((row,index)=>(
-                            <ShopRowItem key={index} idx={index} row={row}/>
-                        ))
-                    }
-                </tbody>
-            </table>
+            </div>
         </div>
     );
 }

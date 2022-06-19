@@ -32,23 +32,31 @@ ul.menu li:hover{
   cursor: pointer;
 }
 /* 슬라이드바 */
+div.info{
+  position: fixed;
+}
+div.info p{
+  margin: 0;
+}
 input[id="menuicon"] {display:none;}
 input[id="menuicon"] + label {display:block;margin:30px;width:50px;height:20px;position:relative;cursor:pointer;}
+input[id="menuicon"] + label p:nth-child(1) {display:block;border:1px solid black;position:fixed;width:25px;height:25px;border-radius:8px 25px;transition:all .35s;}
+input[id="menuicon"] + label p:nth-child(2) {position:fixed;transition:all .35s;}
 input[id="menuicon"] + label span {display:block;position:absolute;width:25px;height:2px;border-radius:30px;background:#000;transition:all .35s;}
 input[id="menuicon"] + label span:nth-child(1) {top:0;}
 input[id="menuicon"] + label span:nth-child(2) {top:50%;transform:translateY(-50%);} /* ����ϰ� ����� �� �ִ� style top:calc(50% - 2.5px); margin-top:-2.5px;*/
 input[id="menuicon"] + label span:nth-child(3) {bottom:0;}
 input[id="menuicon"]:checked + label {z-index:2;}
-input[id="menuicon"]:checked + label span {background:#fff;}
+input[id="menuicon"]:checked + label p:nth-child(1) {border:1px solid #fff;transform:rotate(90deg);}
+input[id="menuicon"]:checked + label p {color:#fff;}
 input[id="menuicon"]:checked + label span:nth-child(1) {top:50%;transform:translateY(-50%) rotate(45deg);}
 input[id="menuicon"]:checked + label span:nth-child(2) {opacity:0;}
 input[id="menuicon"]:checked + label span:nth-child(3) {bottom:50%;transform:translateY(50%) rotate(-45deg);}
 div[class="sidebar"] {width:300px;height:100%;color: aliceblue; background:rgb(44, 44, 44); opacity: 90%; position:fixed;top:0;left:-300px;z-index:1;transition:all .35s;}
 input[id="menuicon"]:checked + label + div {left:0;}
-
 div.sidebar .sidebar-content{
-  width: 280px;
-  margin: 80px auto;
+  width: 260px;
+  margin: 90px auto;
 }
 
 /* 라우트메인 */
@@ -58,11 +66,22 @@ div.sidebar .sidebar-content{
 
 /*Shop*/
 div.shopList{
+  margin: 30px 0;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-wrap: wrap;
 }
-
+div.shop-row-wrap{
+  padding: 15px 23px;
+  cursor: pointer;
+  border: 1px solid rgb(200, 200, 200);
+  border-collapse: collapse;
+}
+div.shop-detail-wrap{
+}
+div.shop-detail-wrap img.shop-row-img{
+  width: 200px;
+  height: 200px;
+}
 /* ShopForm */
 div.shopForm{
   width: 100%;
@@ -83,6 +102,7 @@ div.shopDetail{
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 80px;
 }
 div.detail-top{
   display: flex;
@@ -90,6 +110,12 @@ div.detail-top{
 div.shopDetail{
   display: flex;
   flex-direction: column;
+}
+div.detail-bottom{
+  width: 170px;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
 }
 div.sangpum-photo{
 
@@ -105,15 +131,41 @@ div.memo-wrap{
 
 }
 div.comment-input-wrap{
-  width: 958px;
-  padding: 8px 21px;
+  width: 928px;
+  padding: 30px 36px;
   display: flex;
   justify-content: space-between;
+  /* border-top: 1.5px solid gainsboro; */
+  border-bottom: 0.5px solid gainsboro;
 }
+div.memo-nickname-wrap{
+  width: 150px;
+  height: 32px;
+  border-radius: 30px;
+  border: 2px solid rgb(166, 166, 166);
+  line-height: 32px;
+  text-align: center;
+}
+div.memo-message-wrap{
+  width: 640px;
+  height: 32px;
+  line-height: 32px;
+  border-radius: 30px;
+  border: 2px solid rgb(166, 166, 166);
+  text-align: center;
+}
+.memo-text{
+  border: 0;
+  /* border-bottom: 1px solid black; */
+}
+/* comment-list */
 div.comment-wrap{
   height: 600px;
   -ms-overflow-style: none;
   overflow: auto;
+  /* margin-top: 10px; */
+  margin-bottom: 50px;
+
 }
 div.comments{
   display: flex;
@@ -122,8 +174,6 @@ div.comments{
   align-items: center;
   width: 968px;
   /* border: 1px solid red; */
-  margin-top: 30px;
-  margin-bottom: 50px;
   padding: 0 16px;
 }
 div.comment-wrap::-webkit-scrollbar{
@@ -139,11 +189,16 @@ div.memo-row-wrap{
   box-shadow: 0 2px 5px 1px rgb(64 60 67 / 16%);
 }
 div.time-btn-wrap {
-  width: 100px;
+  width: 80px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
+.memo-dots-svg:hover{
+
+}
 div.memo-message{
-  overflow: hidden;
+  width: 250px;
+  height: 140px;
+  overflow: auto;
 }

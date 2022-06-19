@@ -4,7 +4,7 @@ import '../App.css';
 const Board = () => {
     return (
         <div>
-            <h1>board</h1>
+            <h1>Board</h1>
         </div>
     )
 }

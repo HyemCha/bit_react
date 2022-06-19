@@ -93,10 +93,10 @@ const ShopForm = () => {
                             <img src={photoUrl+photo} style={{width:'120px',marginLeft:'130px'}}/>
                         </td>
                         <td >    
-                            {/* <Button variant="outlined"
-                            onClick={onInsert}>등록</Button> */}
-                            <button type="button"
-                            onClick={onInsert}>등록</button>
+                            <Button variant="outlined"
+                            onClick={onInsert}>등록</Button>
+                            {/* <button type="button"
+                            onClick={onInsert}>등록</button> */}
                         </td>
                     </tr>
                 </tbody>
