@@ -49,8 +49,7 @@ export default function Memo(){
             console.log("성공");
             setNickname('닉네임');
             setMessage('내용');
-            navi("/memo/list");
-
+            list();
         })
     }
 
@@ -77,7 +76,7 @@ export default function Memo(){
                 }}/>
             </div>
             <div className='memo-message-wrap'>
-                <textarea cols='80' rows='1' className='memo-text' placeholder={message} style={{marginTop:'4px',outline:'none',resize:'none'}}
+                <textarea cols='75' rows='1' className='memo-text' placeholder={message} style={{marginTop:'4px',outline:'none',resize:'none'}}
                 onChange={e=>{
                     setMessage(e.target.value);
                 }}></textarea>

@@ -1,10 +1,22 @@
 import * as React from 'react';
-import '../App.css';
+import './Login.css';
+import LoginForm from './LoginForm';
+import Logout from './Logout';
 
 const Login = () => {
+    let loginok = localStorage.loginok;
+
+    React.useEffect(()=>{
+
+    },[loginok])
+
     return (
         <div>
-            <h1>Login</h1>
+            {console.log("loginok",loginok)}
+            {
+                loginok === 'yes' ? <Logout/> : <LoginForm/> 
+            }
+            {loginok}
         </div>
     )
 }
