@@ -157,34 +157,28 @@ const Member = () => {
 
     const onFinish = (values) => {
         console.log('Received values of form: ', values);
+        const url = process.env.REACT_APP_SPRING_URL + "member/insert";
+        axios.post(url, values)
+        .then(res => {
+            // alert("insert 성공");
+            navi("/login");
+        })
+    };
+    
+    const [autoCompleteResult, setAutoCompleteResult] = useState([]);
+
+    const onWebsiteChange = (value) => {
+        if (!value) {
+            setAutoCompleteResult([]);
+        } else {
+            setAutoCompleteResult(['.com', '.org', '.net'].map((domain) => `${value}${domain}`));
+        }
     };
 
-    const prefixSelector = (
-        <Form.Item name="prefix" noStyle>
-            <Select
-                style={{
-                width: 70,
-                }}
-            >
-                <Option value="86">+86</Option>
-                <Option value="87">+87</Option>
-            </Select>
-        </Form.Item>
-        );
-        const [autoCompleteResult, setAutoCompleteResult] = useState([]);
-
-        const onWebsiteChange = (value) => {
-            if (!value) {
-            setAutoCompleteResult([]);
-            } else {
-            setAutoCompleteResult(['.com', '.org', '.net'].map((domain) => `${value}${domain}`));
-            }
-        };
-
-        const websiteOptions = autoCompleteResult.map((website) => ({
-            label: website,
-            value: website,
-        }));
+    const websiteOptions = autoCompleteResult.map((website) => ({
+        label: website,
+        value: website,
+    }));
 
         const onIdJungbok = (e) => {
             const url = process.env.REACT_APP_SPRING_URL + "member/idcheck?id=" + data.id;
@@ -214,10 +208,6 @@ const Member = () => {
                     form={form}
                     name="register"
                     onFinish={onFinish}
-                    initialValues={{
-                        residence: ['zhejiang', 'hangzhou', 'xihu'],
-                        prefix: '86',
-                    }}
                     scrollToFirstError
                     >
                     <Form.Item
@@ -225,12 +215,8 @@ const Member = () => {
                         label="아이디"
                         rules={[
                         {
-                            type: 'email',
-                            message: 'The input is not valid E-mail!',
-                        },
-                        {
                             required: true,
-                            message: 'Please input your E-mail!',
+                            message: 'Please input your 아이디!',
                         },
                         ]}
                     >
@@ -271,7 +257,7 @@ const Member = () => {
                     <Form.Item
                         name="confirm"
                         label="비밀번호 확인"
-                        dependencies={['password']}
+                        dependencies={['pass']}
                         hasFeedback
                         rules={[
                         {
@@ -280,7 +266,7 @@ const Member = () => {
                         },
                         ({ getFieldValue }) => ({
                             validator(_, value) {
-                            if (!value || getFieldValue('password') === value) {
+                            if (!value || getFieldValue('pass') === value) {
                                 return Promise.resolve();
                             }
 
@@ -295,7 +281,7 @@ const Member = () => {
                     <Form.Item
                         name="name"
                         label="이름"
-                        tooltip="What do you want others to call you?"
+                        tooltip="다른 사람들에게 불리고 싶은 이름을 써주시든가"
                         rules={[
                         {
                             required: true,

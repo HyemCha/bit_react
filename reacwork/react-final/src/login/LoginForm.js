@@ -61,7 +61,7 @@ export default function LoginForm(){
                 // onSubmit={onSubmit}
                 >
                     <Form.Item
-                        name="username"
+                        name="name"
                         rules={[
                         {
                             required: true,
@@ -75,7 +75,7 @@ export default function LoginForm(){
                         }}/>
                     </Form.Item>
                     <Form.Item
-                        name="password"
+                        name="pass"
                         rules={[
                         {
                             required: true,
