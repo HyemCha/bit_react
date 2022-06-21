@@ -162,6 +162,7 @@ const Member = () => {
         axios.post(url, values)
         .then(res => {
             // alert("insert 성공");
+            console.log("member form",form)
             navi("/login");
         })
     };
