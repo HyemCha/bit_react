@@ -344,6 +344,11 @@ const Member = () => {
                         가입하기
                         </Button>
                     </Form.Item>
+                    <Form.Item {...tailFormItemLayout}>
+                        <Button type="primary" htmlType="submit">
+                        가입하기
+                        </Button>
+                    </Form.Item>
                 </Form>
             {/* <form className='form-inline' onSubmit={onSave}>
                 <table style={{widht:'600px', border:'1px solid gray'}}>

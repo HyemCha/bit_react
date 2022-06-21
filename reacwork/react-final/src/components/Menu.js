@@ -11,21 +11,6 @@ import axios from 'axios';
 
 const Menu = () => {
     
-    const [id,setId] = React.useState(localStorage.getItem('myid'))
-    const [name,setName] = React.useState(null);
-
-    const getNameUrl = process.env.REACT_APP_SPRING_URL + "member/getName?id=" + id;
-
-    axios.get(getNameUrl)
-    .then(res => {
-        console.log("name 도착!",res.data)
-        setName(res.data)
-    })
-    .catch(err=>{
-        console.log("시루패")
-        console.log(err)
-    })
-
     return (
         <ul className='menu'>
             <li><NavLink to='/'><HomeIcon/></NavLink></li>
@@ -33,7 +18,7 @@ const Menu = () => {
             <li><NavLink to='/shop/list'>Shop</NavLink></li>
             <li><NavLink to='/board/list'>Board</NavLink></li>
             <li><NavLink to='/about'>About</NavLink></li>
-            <li><NavLink to='/login'>{localStorage.loginok === 'yes' ? <span>{name}({localStorage.getItem('myid')})</span> : <LoginIcon/>}</NavLink></li>
+            <li><NavLink to='/login'>{localStorage.loginok === 'yes' ? <LogoutIcon/> : <LoginIcon/>}</NavLink></li>
             <li><NavLink to='/member/form'>
                     <Stack direction="row" spacing={2}>
                         <Avatar alt="Remy Sharp" src={memberprofile} />

@@ -126,6 +126,7 @@ div.sangpum-detail{
 }
 /* memo */
 div.memo-wrap{
+  all: unset;
   display: flex;
   flex-direction: column;
 
