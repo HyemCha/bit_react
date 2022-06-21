@@ -1,7 +1,10 @@
 package data.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -40,5 +43,15 @@ public class MemberController {
     @GetMapping("/getName")
     public String getName(@RequestParam String id){
         return  memberService.getName(id);
+    }
+
+    @GetMapping("/list")
+    public List<MemberDto> getDatas(){
+        return memberService.getAllMembers();
+    }
+
+    @DeleteMapping("/delete")
+    public void deleteMember(int num){
+        memberService.deleteMember(num);
     }
 }

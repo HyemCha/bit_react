@@ -52,6 +52,7 @@ import {
   
 
 const Member = () => {
+    
     const navi = useNavigate();
     const [data,setData] = React.useState({
         id:'',
@@ -294,6 +295,23 @@ const Member = () => {
                     </Form.Item>
 
                     <Form.Item
+                        name="addr"
+                        label="주소"
+                        rules={[
+                        {
+                            required: true,
+                            message: 'Please input your address!',
+                        },
+                        ]}
+                    >
+                        <Input
+                        style={{
+                            width: '100%',
+                        }}
+                        />
+                    </Form.Item>
+
+                    <Form.Item
                         name="ph"
                         label="번호"
                         rules={[
@@ -329,114 +347,13 @@ const Member = () => {
                         <Button type="primary" htmlType="submit">
                         가입하기
                         </Button>
-                    </Form.Item>
-                    <Form.Item {...tailFormItemLayout}>
-                        <Button type="primary" htmlType="submit">
-                        가입하기
+                        <Button
+                        onClick={()=>navi("/member/list")}>
+                        회원목록
                         </Button>
                     </Form.Item>
                 </Form>
-            {/* <form className='form-inline' onSubmit={onSave}>
-                <table style={{widht:'600px', border:'1px solid gray'}}>
-                    <caption><h3><b>회원가입</b></h3></caption>
-                    <tbody>
-                        <tr>
-                            <th width='100'>이&emsp;&emsp;름</th>
-                            <td>
-                                <input type='text' className='form-control'
-                                style={{width:'130px'}} name='name'
-                                onChange={onDataChange} required></input>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th width='100'>아&ensp;이&ensp;디</th>
-                            <td>
-                                <input type='text' className='form-control'
-                                style={{width:'130px'}} name='id' required
-                                value={data.id}
-                                onChange={onDataChange}></input>
-                                <Button sx={{height:'35px',marginLeft:'5px'}}
-                                onClick={onIdJungbok}>중복체크</Button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th width='100'>비밀번호</th>
-                            <td>
-                                <input type='password' className='form-control'
-                                style={{width:'100px'}} name='pass' required
-                                onChange={onDataChange}></input>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th width='100'>비밀번호 확인</th>
-                            <td>
-                                <input type='password' className='form-control'
-                                style={{width:'100px',marginLeft:'5px'}}
-                                onChange={onPassChange} required></input>
-                                <span style={{marginLeft:'5pxx',color:'red'}}>{passOk?'😀':'😒'}</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th width='100'>이&ensp;메&ensp;일</th>
-                            <td>
-                                <input type='text' className='form-control'
-                                style={{width:'130px'}}
-                                onChange={e => {
-                                    setEmail1(e.target.value);
-                                }} required></input>
-                                <input type='text' className='form-control'
-                                style={{width:'130px'}}
-                                defaultValue={email2}
-                                onChange={e => {
-                                    setEmail1(e.target.value);
-                                }} required/>
-                                &ensp;
-                                <select className='form-control' onChange={onEmailChange}>
-                                    <option value="">직접입력</option>
-                                    <option value='@naver.com'>네이버</option>
-                                    <option value='@daum.net'>다음</option>
-                                    <option value='@nate.com'>네이트</option>
-                                    <option value='@gmail.com'>구글</option>
-                                </select>
-
-                                <Button type='submit' sx={{height:'35px'}} variant="outlined" href="#outlined-buttons" 
-                                onClick={() => {
-                                    setData(prevState => {
-                                        return({...prevState,email:email1+email2,emailok:true})
-                                    })
-                                }}>
-                                    이메일 중복
-                                </Button>
-
-                            </td>
-                        </tr>
-                        <tr>
-                            <th width='100'>핸&ensp;드&ensp;폰</th>
-                            <td>
-                                <input type='text' className='form-control'
-                                style={{width:'180px'}} name='hp'
-                                onChange={onDataChange} required></input>
-                                
-                            </td>
-                        </tr>
-                        <tr>
-                            <th width='100'>주&emsp;&emsp;소</th>
-                            <td>
-                                <input type='text' className='form-control'
-                                style={{width:'350px'}} name='addr'
-                                onChange={onDataChange} required></input>
-                                
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colSpan={2} style={{textAlign:'center'}}>
-                            <Button type='submit' sx={{height:'35px'}} variant="outlined" href="#outlined-buttons" onClick={onSave}>가입하기</Button>
-                            <Button sx={{height:'35px', marginLeft:'5px'}} variant="outlined" href="#outlined-buttons">회원명단</Button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </form> */}
+            
         </div>
     )
 }
