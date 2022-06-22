@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import data.dto.BoardDto;
 import data.service.BoardService;
+import data.service.MemberService;
 import util.FileUtil;
 
 @RestController
@@ -30,6 +31,9 @@ public class BoardController {
 
     @Autowired
     private BoardService boardService;
+
+    @Autowired
+    private MemberService memberService;
 
     String photoName; //리액트에서 업로드한 이미지명(변경된 이미지명일 수도 )
 
@@ -65,15 +69,19 @@ public class BoardController {
         return photoName;
     }
 
-    @GetMapping("/inesrt")
+    @PostMapping("/insert")
     public void insert(@RequestBody BoardDto dto){
+        dto.setName(memberService.getName(dto.getId()));
+        System.out.println(dto);
         boardService.insertBoard(dto);
+        photoName="";
     }
 
     @GetMapping("/detail")
-    public BoardDto detail(@RequestParam int num){
+    public BoardDto detail(@RequestParam int num,@RequestParam int currentPage){
         //조회수 증가
         boardService.updateReadCount(num);
+        System.out.println("detail currentPage:"+currentPage);
         //dto 얻기
         return boardService.getData(num);
     }
@@ -99,6 +107,7 @@ public class BoardController {
         
         //총글의갯수를 구한다
         totalCount=boardService.getTotalCount();
+        System.out.println("totalCount:"+totalCount);
         //총페이지수를 구한다
         //밑에두개 같은거임
         totalPage=totalCount/perPage+(totalCount%perPage==0?0:1);
@@ -126,7 +135,7 @@ public class BoardController {
 
         //출력할 페이지 번호
         Vector<Integer> parr = new Vector<>();
-        for(int pp=startPage; pp<endPage; pp++){
+        for(int pp=startPage; pp<=endPage; pp++){
             parr.add(pp);
         }
 
