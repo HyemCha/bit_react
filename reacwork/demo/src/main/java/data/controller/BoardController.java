@@ -67,6 +67,7 @@ public class BoardController {
 
     @GetMapping("/inesrt")
     public void insert(@RequestBody BoardDto dto){
+        dto.setPhoto(photoName);
         boardService.insertBoard(dto);
     }
 
