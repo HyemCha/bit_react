@@ -71,6 +71,7 @@ public class BoardController {
 
     @PostMapping("/insert")
     public void insert(@RequestBody BoardDto dto){
+        dto.setPhoto(photoName);
         dto.setName(memberService.getName(dto.getId()));
         System.out.println(dto);
         boardService.insertBoard(dto);
