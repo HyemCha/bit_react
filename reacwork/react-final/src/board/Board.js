@@ -13,7 +13,7 @@ import ViewAgendaIcon from '@mui/icons-material/ViewAgenda';
 
 
 const Board = () => {
-    const [show,setShow] = React.useState(''); 
+    const [show,setShow] = React.useState(1); 
     const navi = rrd.useNavigate();
     const {num} = rrd.useParams();
 
@@ -23,35 +23,39 @@ const Board = () => {
         <div>
             
             <h1>Board</h1>
-            <Button
+            <div style={{display:'flex',alignItems:'center',justifyContent:'space-between'}}>
+                <Button variant="outlined" sx={{width:'80px',height:'35px',fontSize:'14px'}}
                     onClick={()=>{
                         navi("/board/form")
                     }}>글작성</Button>
-            <Box
-            sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                '& > *': {
-                m: 1,
-                },
-            }}
-            >
-                <ButtonGroup variant="text" aria-label="text button group">
-                    <Button 
-                    onClick={()=>{
-                        setShow(1);
-                    }}><FormatListBulletedOutlinedIcon/></Button>
-                    <Button
-                    onClick={()=>{
-                        setShow(2);
-                    }}><GridViewIcon/></Button>
-                    <Button
-                    onClick={()=>{
-                        setShow(3);
-                    }}><ViewAgendaIcon/></Button>
-                </ButtonGroup>
-            </Box>
+
+                <Box
+                sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    '& > *': {
+                    m: 1,
+                    },
+                }}
+                >
+                    <ButtonGroup sx={{height:'35px'}} variant="outlined" aria-label="text button group">
+                        <Button 
+                        onClick={()=>{
+                            setShow(1);
+                        }}><FormatListBulletedOutlinedIcon/></Button>
+                        <Button
+                        onClick={()=>{
+                            setShow(2);
+                        }}><GridViewIcon/></Button>
+                        <Button
+                        onClick={()=>{
+                            setShow(3);
+                        }}><ViewAgendaIcon/></Button>
+                    </ButtonGroup>
+                </Box>
+            </div>
+            
             <div>
                 {show==1?<BoardList1/>:show==2?<BoardList2/>:<BoardList3/>}
             </div>

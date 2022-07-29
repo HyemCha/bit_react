@@ -42,7 +42,7 @@ export default function Shop() {
     return (
         <div>
             <h1>Shop&nbsp;&nbsp;<span style={{fontSize:'14px',fontWeight:'normal'}}>음~ 맛있다~ 마.트. 다녀오셨어요?🍜</span></h1>
-            <Button variant="outlined"
+            <Button variant="outlined" sx={{width:'85px',height:'35px',fontSize:'12px'}}
             onClick={()=>{
                 navi("/shop/form")
             }}>상품등록</Button>

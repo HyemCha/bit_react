@@ -2,35 +2,29 @@ import * as React from 'react';
 import '../App.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import catimg from '../image/서있는 고양이.jpeg'
 
 export default function BoardForm(){
     const [photo, setPhoto] = React.useState('');
-    const [name, setName] = React.useState('');
+    const [subject,setSubject] = React.useState('');
+    const [content, setContent] = React.useState('');
+
     const navi = useNavigate();
+
     let loginok = localStorage.loginok;
     let id = localStorage.myid;
+
+    const uploadUrl = process.env.REACT_APP_SPRING_URL + "board/upload"
+    const insertUrl = process.env.REACT_APP_SPRING_URL + "board/insert"
+    const photoUrl = process.env.REACT_APP_SPRING_URL + "save/"
 
     const initFunc = () => {
         if(loginok !== 'yes'){
             alert("먼저 로그인 후 글을 작성해주세요")
             navi("/login")
-        }else{
-            id = localStorage.myid;
-            const url = process.env.REACT_APP_SPRING_URL + "member/getName?id=" + id;
-            axios.get(url)
-            .then(res => {
-                console.log("name 도착!",res.data)
-                setName(res.data)
-            })
-            .catch(err=>{
-                console.log("시루패")
-                console.log(err)
-            })
         }
     }
 
-    const uploadUrl = process.env.REACT_APP_SPRING_URL + "board/upload"
-    const insertUrl = process.env.REACT_APP_SPRING_URL + "board/insert"
 
     //file change 시 호출 이벤트
     const uploadImage = e => {
@@ -43,22 +37,32 @@ export default function BoardForm(){
             url:uploadUrl,
             data:imageFile,
             headers:{'Content-Type':'multipart/form-data'} //뭐 어쩌구저쩌구라 이거롤 바꿔줘야 ㅏㅁ
-        }).then( res => { //파일응ㄹ 여기로 보냄
+        }).then( res => { //파일을 여기로 보냄
             setPhoto(res.data); //백엔드에서 보낸 변경된 이미지명을 photo 변수에 넣는다
         }).catch( err => {
             alert(err);
         });
     }
 
-    const insertData = (values) => {
-        console.log('Received values of form: ', values);
-        axios.post(insertUrl)
+    //submit 이벤트
+    const onSubmitInsert = e => {
+        e.preventDefault();
+
+        axios.post(insertUrl,{id,photo,subject,content})
         .then(res=>{
-            console.log("insert 성공")
+            navi("/board/list/1");
         })
     }
 
-    
+    // const insertData = (values) => {
+        
+    //     console.log('Received values of form: ', values);
+    //     axios.post(insertUrl)
+    //     .then(res=>{
+    //         console.log("insert 성공")
+    //     })
+    // }
+
 
     React.useEffect(()=> {
         initFunc();
@@ -66,8 +70,9 @@ export default function BoardForm(){
 
 
 
-    return <div>
-            <form onSubmit={insertData}>
+    return <div className='boartForm'>
+            <img alt='' src={photoUrl+photo} className='imgphoto'/>
+            <form onSubmit={onSubmitInsert}>
                 <table className='table table-bordered' style={{width:'400px'}}>
                     <caption><h3>게시판 글쓰기</h3></caption>
                     <tbody>
@@ -86,14 +91,20 @@ export default function BoardForm(){
                         <tr>
                             <th style={{backgroundColor:'#ddd'}} widht='100'>제목</th>
                             <td>
-                                <input name='subject' type='text' className='form-control' style={{width:'300px'}} required/>
+                                <input name='subject' type='text' className='form-control' style={{width:'300px'}} required
+                                onChange={e=>{
+                                    setSubject(e.target.value)
+                                }}/>
 
                             </td>
                         </tr>
                         <tr>
                             <td colSpan={2}>
                                 <textarea name='content' className='form-control' required
-                                style={{width:'480px',height:'120px'}}></textarea>
+                                style={{width:'480px',height:'120px'}}
+                                onChange={e=>{
+                                    setContent(e.target.value)
+                                }}></textarea>
                             </td>
                         </tr>
                         <tr>

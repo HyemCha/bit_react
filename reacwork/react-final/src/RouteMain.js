@@ -9,6 +9,7 @@ import Member from './member/Member';
 import MemberList from './member/MemberList';
 import Memo from './memo/Memo';
 import BoardForm from './board/BoardForm';
+import BoardDetail from './board/BoardDetail';
 
 const RouteMain = () => {
 
@@ -32,8 +33,9 @@ const RouteMain = () => {
 
                         <router.Route path='/' element={<Main/>}/>
 
-                        <router.Route path='/board/list' element={<Board/>}/>
+                        <router.Route path='/board/list/:currentPage' element={<Board/>}/>
                         <router.Route path='/board/form' element={<BoardForm/>}/>
+                        <router.Route path='/board/detail/:num/:currentPage' element={<BoardDetail/>}/>
 
                         <router.Route path='/member/form' element={<Member/>}/>
                         <router.Route path='/member/list' element={<MemberList/>}/>
@@ -49,12 +51,9 @@ const RouteMain = () => {
                     </router.Routes>
                 </div>
             </div>
-
-            
-
-
         </div>
     )
 }
 
 export default RouteMain;
+

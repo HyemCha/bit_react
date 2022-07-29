@@ -42,7 +42,6 @@ export default function Logout(){
         // navi("/")
         window.location.reload();
         console.log("logout btn logoutC",logoutC)
-
     }
     
     return (

@@ -75,12 +75,12 @@ const MemoRowItem = ({idx,row,listLength,onDelete}) => {
     }, [open]);
 
     return (
-        <div className='memo-row-wrap'>
+        <div className='memo-row-wrap' style={{boxSizing:'unset'}}>
             <div style={{fontSize:'12px',color:'gray',display:'flex',justifyContent:'space-between'}}>
                 <span>{listLength-idx}</span>
                 <div className='time-btn-wrap'>
-                    <span>{timeForToday(row.writeday)}</span>&nbsp;
-                    <MoreVertIcon className='memo-dots-svg' sx={{width:'18px'}} 
+                    
+                    <MoreVertIcon className='memo-dots-svg' sx={{width:'20px',height:'19px'}} 
                         ref={anchorRef}
                         id="composition-button"
                         aria-controls={open ? 'composition-menu' : undefined}
@@ -103,27 +103,30 @@ const MemoRowItem = ({idx,row,listLength,onDelete}) => {
                             placement === 'bottom-start' ? 'left top' : 'left bottom',
                         }}
                         >
-                        <Paper>
-                            <ClickAwayListener onClickAway={handleClose}>
-                            <MenuList
-                                autoFocusItem={open}
-                                id="composition-menu"
-                                aria-labelledby="composition-button"
-                                onKeyDown={handleListKeyDown}
-                            >
-                                <MenuItem onClick={e=>{
-                                    deleteMemo(e,row.num)
-                                }}>삭제하기</MenuItem>
-                            </MenuList>
-                            </ClickAwayListener>
-                        </Paper>
+                            <Paper>
+                                <ClickAwayListener onClickAway={handleClose}>
+                                <MenuList
+                                    autoFocusItem={open}
+                                    id="composition-menu"
+                                    aria-labelledby="composition-button"
+                                    onKeyDown={handleListKeyDown}
+                                >
+                                    <MenuItem sx={{fontSize:'12px'}}
+                                    onClick={e=>{
+                                        deleteMemo(e,row.num)
+                                    }}>삭제하기</MenuItem>
+                                </MenuList>
+                                </ClickAwayListener>
+                            </Paper>
                         </Grow>
                     )}
                     </Popper>
                 </div>
                 
             </div>
-            <div style={{fontSize:'14px',marginTop:'5px'}}><span style={{fontWeight:'bold'}}>{row.nickname}</span>님으로부터의 메모,</div>
+            <span style={{fontSize:'12px',color:'gray',display:'flex',flexDirection: 'row-reverse',margin:'5px'}}>{timeForToday(row.writeday)}</span>
+            <div style={{fontSize:'14px',marginTop:'5px'}}>
+                <span style={{fontWeight:'bold'}}>{row.nickname}</span>님으로부터의 메모,</div>
             <div className='memo-message' style={{marginTop:'5px',overflow:'hidden'}}>{row.message}</div>
         </div>
 

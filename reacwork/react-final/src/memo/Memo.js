@@ -82,7 +82,7 @@ export default function Memo(){
                 }}></textarea>
             </div>
             
-            <Button sx={{height:'35px'}} variant="outlined" href="#outlined-buttons"
+            <Button variant="outlined" href="#outlined-buttons"  sx={{width:'60px',height:'35px',fontSize:'12px'}}
             onClick={()=>{
                 setInsertOk(!insertOk); //true
                 onInsert();
